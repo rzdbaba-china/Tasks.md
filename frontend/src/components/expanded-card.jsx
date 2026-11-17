@@ -4,6 +4,7 @@ import {
   onMount,
   createMemo,
   onCleanup,
+  For,
 } from "solid-js";
 import { api } from "../api";
 import { Menu } from "./menu";
@@ -373,7 +374,7 @@ function ExpandedCard(props) {
                       title={props.t()('expandedCard.rename')}
                       tabIndex="0"
                     >
-                      {props.name || "NO NAME"}
+                      {props.name || props.t()('expandedCard.noName')}
                     </div>
                   )}
                 </h1>

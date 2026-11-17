@@ -22,6 +22,7 @@ export default defineConfig({
         short_name: "Tasks.md",
         description:
           "A self-hosted file based task management board that supports Markdown syntax",
+        lang: "zh-CN",
         theme_color: "#1c1c1c",
         background_color: "#1c1c1c",
         icons: [

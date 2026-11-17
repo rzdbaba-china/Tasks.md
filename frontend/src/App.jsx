@@ -1171,7 +1171,7 @@ function App() {
         e.preventDefault();
         if (focusedCardId()) {
           const card = cards().find(c => c.name === focusedCardId());
-          if (card && confirm(`Delete card "${card.name}"?`)) {
+          if (card && confirm(t()('card.deleteConfirm', { name: card.name }))) {
             // Find cards in the same lane for next focus
             const currentLaneCards = getCardsFromLane(card.lane);
             const currentIndexInLane = currentLaneCards.findIndex(c => c.name === focusedCardId());

@@ -1,4 +1,5 @@
 import { createEffect, createMemo, createSignal, onMount, For } from "solid-js";
+import { LOCALE_OPTIONS } from "../i18n";
 
 /**
  *
@@ -90,8 +91,9 @@ export function Header(props) {
       <div class="app-header__group-item">
         <div class="app-header__group-item-label">{props.t()('header.locale')}:</div>
         <select onChange={props.onLocaleChange} value={props.locale}>
-          <option value="en">English</option>
-          <option value="es">Español</option>
+          <For each={LOCALE_OPTIONS}>
+            {(option) => <option value={option.value}>{option.label}</option>}
+          </For>
         </select>
       </div>
     </header>

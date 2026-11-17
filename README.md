@@ -12,7 +12,7 @@ A self-hosted, Markdown file based task management board.
 - Heavily customizable with 3 default color themes ([Adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/named-colors.html), [Nord](https://www.nordtheme.com/) and [Catppuccin](https://github.com/catppuccin/catppuccin));
 - Support for subpath based reverse-proxy with an environment variable for base path;
 - Can be installed as PWA.
-- Multilingual support, with locale auto-detected from browser and persisted per user;
+- Multilingual support (English, Spanish, Simplified Chinese and Traditional Chinese), with Simplified Chinese as the default interface language and each user's choice persisted in the browser;
 
 ## Upgrade from 2.X.X to 3.X.X
 If you're running a docker container with version 2 of Tasks.md and want to upgrade it to version 3, please follow up [those instructions](/migration-guide.md) as it requires some tweeks for it to work properly.
@@ -27,6 +27,7 @@ docker run -d \
   -e PGID=1000 \
   -e TITLE="" \
   -e BASE_PATH="" \
+  -e VITE_APP_LOCALE=zh-CN \
   -e LOCAL_IMAGES_CLEANUP_INTERVAL=1440 \
   -p 8080:8080 \
   -v /path/to/tasks/:/tasks/ \
@@ -38,6 +39,7 @@ Remove the environment variables you don't want to keep (all of them are optiona
 - `PUID` and `PGID`: User ID and group ID that owns the files and directories. On linux distros you can find your user's UID and GID running `id` in the terminal, but it's usually `1000` for both variables. If no value is assigned for those variables, docker will create all the files and directories as root. You can read more about it [here](https://docs.linuxserver.io/general/understanding-puid-and-pgid/).
 - `TITLE`: A given name that shows below the header and in the browser tab when accessing root path;
 - `BASE_PATH`: Base path in the url. Use this variable if you are going to run the app under a subpath based reverse-proxy. Be aware that PWA does not work when BASE_PATH is set with anything other than "/";
+- `VITE_APP_LOCALE`: Default interface language used when there is no saved preference. Supported values are `zh-CN` (Simplified Chinese, built-in default), `zh-TW` (Traditional Chinese), `en` (English) and `es` (Spanish). Leave it empty (`-e VITE_APP_LOCALE=`) to auto-detect from the browser instead, with Simplified Chinese as the final fallback. The frontend is rebuilt by `entrypoint.sh` on every container start, so a changed value applies from the next start. Every user can still switch language from the selector in the header;
 - `LOCAL_IMAGES_CLEANUP_INTERVAL`: After a given interval the app will remove all local images that aren't present in any task. This variable control the duration in minutes of this interval. The default value is 1440 (exactly 24h). Set it as 0 to disable it.
 
 
@@ -51,6 +53,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - VITE_APP_LOCALE=zh-CN
     volumes:
       - /path/to/tasks:/tasks
       - /path/to/config:/config
@@ -60,6 +63,16 @@ services:
 ```
 Use the Docker section above as reference for setting up variables and volumes.
 
+### Fast deployment without compiling (ARM / Armbian)
+The repository also ships a prebuilt frontend in `prebuilt/static` (Simplified Chinese is the built-in default), so the image does not have to compile anything. On the target machine:
+
+```bash
+bash armbian-install.sh
+```
+
+This builds `Dockerfile.prebuilt` (about 1-2 minutes even on a low-power ARM board), creates `/srv/tasks.md`, starts the `tasks-md` container on port 8080 and prints the URL. Overrides: `PORT`, `DATA_DIR`, `PUID`, `PGID`, `NPM_REGISTRY`.
+
+Two limitations of this variant: it serves at the site root only (no `BASE_PATH` support), and the default language is compiled in. Every user can still switch language from the selector in the header. To change the default language or translations, rebuild the frontend (`cd frontend && npm install && npm run build -- --base=/`) and copy the resulting `dist/` into `prebuilt/static/`.
 
 ### Source code
 Clone the repository with `git clone --recursive`, open a terminal instance in the `/frontend` directory and another one in the `/backend` directory, then in both of them run `npm install` and `npm start`. The env variables are set in `package.json` file for both directories, and are the same ones listed in the Docker section above, plus `CONFIG_DIR` and `TASKS_DIR` for config and tasks directories paths.

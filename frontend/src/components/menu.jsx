@@ -1,5 +1,6 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 import { clickOutside, handleKeyDown } from "../utils";
+import { useI18n } from "../i18n";
 
 /**
  *
@@ -12,6 +13,7 @@ import { clickOutside, handleKeyDown } from "../utils";
  * @param {Object[]} props.options
  */
 export function Menu(props) {
+	const { t } = useI18n();
 	const [confirmationPromptCb, setConfirmationPromptCb] = createSignal(null);
 	let menuRef;
 	let confirmBtnRef;
@@ -92,14 +94,14 @@ export function Menu(props) {
 							handleKeyDown(e, () => handleOptionConfirmation(e), close)
 						}
 					>
-						Confirm
+						{t()('common.confirm')}
 					</button>
 					<button
 						type="button"
 						onClick={close}
 						onKeyDown={(e) => handleKeyDown(e, close, close)}
 					>
-						Cancel
+						{t()('common.cancel')}
 					</button>
 				</Show>
 			</div>

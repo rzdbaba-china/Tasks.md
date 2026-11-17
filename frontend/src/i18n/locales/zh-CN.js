@@ -1,0 +1,52 @@
+export default {
+	common: {
+		confirm: "确定", cancel: "取消", card: "卡片", lane: "列", noTagsFound: "未找到标签", close: "关闭",
+	},
+	header: {
+		searchPlaceholder: "搜索", filterByTag: "按标签筛选", filterNone: "不筛选",
+		sortBy: "排序方式",
+		sort: { manually: "手动排序", nameAsc: "名称（升序）", nameDesc: "名称（降序）", tagsAsc: "标签（升序）", tagsDesc: "标签（降序）", dueAsc: "截止日期（最近优先）", dueDesc: "截止日期（最远优先）", lastUpdated: "最近更新", createdFirst: "创建时间（最早优先）" },
+		viewMode: "视图模式",
+		view: { extended: "扩展", regular: "标准", compact: "紧凑", tight: "极简" },
+		newLane: "新建列", selectCards: "选择卡片", exitSelection: "退出选择", locale: "语言",
+	},
+	card: { due: "截止 {{date}}", deleteConfirm: "确定删除卡片「{{name}}」？" },
+	cardName: { rename: "重命名", delete: "删除", showOptions: "显示选项" },
+	laneName: { rename: "重命名", deleteCard: "删除该列所有卡片", deleteLane: "删除列", createCard: "新建卡片", showOptions: "显示选项" },
+	expandedCard: {
+		addTag: "添加标签", changeColor: "更改颜色", deleteTag: "删除标签", dueDate: "截止日期",
+		minimize: "还原", expand: "最大化", colorOption: "颜色 {{n}}", rename: "点击重命名", noName: "未命名",
+		tagError: { duplicate: "标签重复" },
+	},
+	bulk: {
+		selected: "已选 {{count}} 张卡片", selected_plural: "已选 {{count}} 张卡片",
+		addTags: "添加标签", removeTags: "移除标签", setDueDate: "设置截止日期", delete: "删除", clearSelection: "清除选择",
+		tagSearchPlaceholder: "搜索标签", removeTagPlaceholder: "移除标签", createTag: "创建「{{tag}}」",
+		deleteConfirm: "确定删除所选卡片？", deleteConfirm_plural: "确定删除所选卡片？",
+	},
+	validation: {
+		mustHaveName: "名称不能为空", hiddenByDot: "名称不能以点号开头", duplicateName: "名称重复",
+		forbiddenChars: "包含不允许的字符", noMdExtension: "不要包含 .md 扩展名", prohibitedName: "该名称为保留名称",
+	},
+	keyboard: {
+		title: "键盘快捷键",
+		sections: { navigation: "导航", cardActions: "卡片操作", general: "通用" },
+		or: " 或 ",
+		shortcuts: {
+			moveFocusUp: "将焦点移到上方的卡片",
+			moveFocusDown: "将焦点移到下方的卡片",
+			moveFocusPrevLane: "将焦点移到上一列",
+			moveFocusNextLane: "将焦点移到下一列",
+			moveCardUp: "在当前列内上移卡片",
+			moveCardDown: "在当前列内下移卡片",
+			moveCardPrevLane: "将卡片移到上一列",
+			moveCardNextLane: "将卡片移到下一列",
+			openCard: "打开/编辑当前卡片",
+			newCard: "在当前列新建卡片",
+			renameCard: "重命名当前卡片",
+			deleteCard: "删除当前卡片（需确认）",
+			clearFocus: "清除焦点 / 关闭对话框",
+			showHelp: "显示此帮助窗口",
+		},
+	},
+}

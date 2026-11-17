@@ -10,14 +10,13 @@ export default {
 		view: { extended: "Extendido", regular: "Regular", compact: "Compacto", tight: "Ajustado" },
 		newLane: "Nueva columna", selectCards: "Seleccionar tarjetas", exitSelection: "Salir de selección", locale: "Idioma",
 	},
-	card: { due: "Vencimiento {{date}}" },
+	card: { due: "Vencimiento {{date}}", deleteConfirm: '¿Eliminar la tarjeta "{{name}}"?' },
 	cardName: { rename: "Renombrar", delete: "Eliminar", showOptions: "Mostrar opciones" },
 	laneName: { rename: "Renombrar", deleteCard: "Eliminar tarjeta", deleteLane: "Eliminar columna", createCard: "Crear tarjeta", showOptions: "Mostrar opciones" },
 	expandedCard: {
 		addTag: "Agregar etiqueta", changeColor: "Cambiar color", deleteTag: "Eliminar etiqueta", dueDate: "Fecha de vencimiento",
-		minimize: "Minimizar", expand: "Expandir", colorOption: "Color {{n}}", rename: "Clic para renombrar",
+		minimize: "Minimizar", expand: "Expandir", colorOption: "Color {{n}}", rename: "Clic para renombrar", noName: "SIN NOMBRE",
 		tagError: { duplicate: "Etiqueta duplicada" },
-		close: "Cerrar"
 	},
 	bulk: {
 		selected: "{{count}} tarjeta seleccionada", selected_plural: "{{count}} tarjetas seleccionadas",
@@ -29,5 +28,25 @@ export default {
 		mustHaveName: "El nombre es obligatorio", hiddenByDot: "Oculto por punto", duplicateName: "Nombre duplicado",
 		forbiddenChars: "Caracteres prohibidos", noMdExtension: "Sin extensión .md", prohibitedName: "Nombre prohibido",
 	},
-	keyboard: { title: "Atajos de teclado", sections: { navigation: "Navegación", cardActions: "Acciones de tarjeta", general: "General" }, shortcuts: {} },
+	keyboard: {
+		title: "Atajos de teclado",
+		sections: { navigation: "Navegación", cardActions: "Acciones de tarjeta", general: "General" },
+		or: " o ",
+		shortcuts: {
+			moveFocusUp: "Mover el foco a la tarjeta de arriba",
+			moveFocusDown: "Mover el foco a la tarjeta de abajo",
+			moveFocusPrevLane: "Mover el foco a la columna anterior",
+			moveFocusNextLane: "Mover el foco a la columna siguiente",
+			moveCardUp: "Subir la tarjeta dentro de la columna",
+			moveCardDown: "Bajar la tarjeta dentro de la columna",
+			moveCardPrevLane: "Mover la tarjeta a la columna anterior",
+			moveCardNextLane: "Mover la tarjeta a la columna siguiente",
+			openCard: "Abrir/editar la tarjeta enfocada",
+			newCard: "Crear una tarjeta en la columna actual",
+			renameCard: "Renombrar la tarjeta enfocada",
+			deleteCard: "Eliminar la tarjeta enfocada (con confirmación)",
+			clearFocus: "Quitar el foco / Cerrar el diálogo",
+			showHelp: "Mostrar esta ayuda",
+		},
+	},
 }

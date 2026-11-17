@@ -1,4 +1,4 @@
-import { createMemo } from "solid-js";
+import { createMemo, For } from "solid-js";
 import { handleKeyDown } from "../utils";
 
 /**

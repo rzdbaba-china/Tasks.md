@@ -1,0 +1,33 @@
+# Prebuilt variant of the image.
+#
+# The frontend is already compiled into prebuilt/static (Simplified Chinese is
+# the built-in default), so the image only needs the small backend dependency
+# set. That makes `docker build` take about 1-2 minutes even on a low-power
+# ARM board such as an Armbian SBC, and the container starts without re-running
+# any frontend build.
+#
+# Build with:
+#   docker build -f Dockerfile.prebuilt -t tasks-md-zh .
+#
+# Language: switch per-browser from the selector in the header. To change the
+# *default* language you need the source build (see Dockerfile + entrypoint.sh).
+FROM alpine:3.20
+
+ARG NPM_REGISTRY=https://registry.npmjs.org
+
+RUN apk add --no-cache nodejs npm
+
+WORKDIR /api
+
+COPY backend/package.json backend/package-lock.json ./
+RUN npm config set registry ${NPM_REGISTRY} && npm ci --no-audit --omit=dev
+
+COPY backend/ /api/
+COPY prebuilt/static/ /api/static/
+COPY entrypoint-prebuilt.sh /api/entrypoint.sh
+
+VOLUME /tasks
+VOLUME /config
+EXPOSE 8080
+
+ENTRYPOINT ["sh", "/api/entrypoint.sh"]
